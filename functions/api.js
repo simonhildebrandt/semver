@@ -85,7 +85,7 @@ app.post("/versions/:key/set", apiKeyAuth, getVersion, async (req, res) => {
 app.post("/versions/:key/inc", apiKeyAuth, getVersion, async (req, res) => {
   const {id, version: oldVersion} = req.version;
 
-  const { level } = req.body;
+  const { level = 'patch' } = req.body;
 
   if(!semver.RELEASE_TYPES.includes(level)) {
     return res.status(422).json({message: 'invalid-level', levels: semver.RELEASE_TYPES});
