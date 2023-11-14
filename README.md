@@ -1,34 +1,36 @@
-# My Webapp Starter
+# SemVer
 
-This repo is the template I use for starting new (frequently experimental) projects.
+A lightweight service for managing versions for things.
 
-## Rationale
+Uses [Login With Link](http://login-with.link) to generate JWTs for auth, then proceed like this:
 
-This is essentially the config I've been copying from project to project for the last few years - it's minimal, (relatively) easy to reason about, and it works. Alternatives I've tried (Webpack, etc) have consistently failed some or all of the above criteria, which is why I've whittled my default loadout to this basic set of tools.
+1. Create an API key:
 
-## Great extras
+```
+$ curl -X POST -H "Content-Type: application/json" -H "Authorization: <LwL auth token>" http://<api host>/api/apikey
 
-#### [Chakra UI](https://chakra-ui.com)
-Handy React UI library. From their ['getting started' page](https://chakra-ui.com/docs/getting-started):
+{"key":"<new API key>"}
+```
 
-```yarn add @chakra-ui/react @emotion/react@^11 @emotion/styled@^11 framer-motion@^4```
+2. Use your new API key to create a version.
 
-#### [Axios](https://axios-http.com/docs/intro)
-Industry standard AJAX library.
+```
+$ curl -X POST -H "Content-Type: application/json" -H "X-API-Key: <API key>" <API host>/api/versions
 
-```yarn add axios```
+{"version":"0.0.0","key":"<new version key>"}
 
-#### [Navigo](https://github.com/krasimir/navigo)
-Friendly, light router library.
+```
 
-```yarn add navigo```
+3a. Increment your new version:
 
-#### [Firebase](https://firebase.google.com/docs/reference)
-Batteries included serverless apps.
+```
+$ curl -X POST -H "Content-Type: application/json" -H "X-API-Key: <API key>" <API host>/api/versions/inc --data '{"level": "minor"}'
+{"oldVersion":"0.0.0","newVersion":"0.1.0"}
+```
 
-```yarn add firebase firebase-tools```
+3b. Or just set to new value:
 
-#### [Luxon](https://moment.github.io/luxon/#/?id=luxon)
-Best-of-breed date helpers.
-
-```yarn add @date-io/luxon```
+```
+$ curl -X POST -H "Content-Type: application/json" -H "X-API-Key: <API key>" <API host>/api/versions/set --data '{"version": "3.2.1"}'
+{"oldVersion":"0.0.0","newVersion":"3.2.1"}
+```

@@ -6,6 +6,7 @@
   "author": "Simon Hildebrandt <simonhildebrandt@gmail.com>",
   "license": "MIT",
   "scripts": {
+    "emulator": "firebase emulators:start",
     "serve": "live-server --port=9000 --entry-file=index.html dev/",
     "build": "yarn esbuild src/index.jsx --bundle --outfile=dev/index.js",
     "watch": "yarn esbuild src/index.jsx --bundle --outfile=dev/index.js --watch",
@@ -14,6 +15,7 @@
   "dependencies": {
     "@babel/polyfill": "^7.12.1",
     "esbuild": "^0.14.18",
+    "firebase-tools": "^12.8.1",
     "live-server": "^1.2.1",
     "react": "^18",
     "react-dom": "^18"
