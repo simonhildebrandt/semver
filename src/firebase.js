@@ -10,8 +10,6 @@ import {
   connectFirestoreEmulator
 } from "firebase/firestore";
 
-import * as firestoreFuncs from "firebase/firestore";
-
 
 const firebaseConfig = {
   apiKey: "AIzaSyA4BocYfYj85wY9HGpXUSXsCb1VELfLtEc",
@@ -30,4 +28,4 @@ connectAuthEmulator(auth, "http://127.0.0.1:9099");
 connectFirestoreEmulator(db, '127.0.0.1', 8080);
 
 
-export { db, auth, firestoreFuncs };
+export { db, auth };
