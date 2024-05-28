@@ -16,7 +16,12 @@ import Admin from 'meta-admin-client';
 const App = () => {
   return <Switch>
     <Route path="/admin">
-      <Admin config={adminConfig} firestore={db} firebaseAuth={auth}/>
+      <Admin
+        config={adminConfig}
+        firestore={db}
+        firebaseAuth={auth}
+        apiURL="http://localhost:5001/semver-517cc/us-central1/admin"
+      />
     </Route>
     <Route path="/">
       <Help/>
